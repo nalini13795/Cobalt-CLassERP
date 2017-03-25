@@ -1,3 +1,11 @@
+<?php
+//Starting Session
+	require_once("config.php");
+	session_start();
+	if(isset($_SESSION['username']))
+	{
+?>
+
 <!DOCTYPE html>
 <html>
 <title>Student Profile</title>
@@ -12,6 +20,20 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 a{text-decoration:none}
 li{font-size:20px}
 .block-small{min-width: 220px;}
+input {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    width: 100%;
+
+}
 </style>
 ​<body>
 <div class="w3-content" style="max-width:1400px">
@@ -19,7 +41,20 @@ li{font-size:20px}
 <header class="w3-margin-bottom w3-animate-opacity w3-container w3-text-white w3-center">
 	<h1><a href="index.html"><b>Cobalt</b> Class<b>ERP</b></a></h1>
 </header>
-<div class="w3-conatiner" style="width:75%;margin:auto;min-width:300px;">
+	<form>
+  		<input type="text" name="search" placeholder="Search..">
+	</form>
+	<br>
+<?php
+if($_SESSION['username']!="admin")
+{
+	$Link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	$SelectBookQuery="SELECT * FROM students where book_id=".
+			"\"" . htmlspecialchars($_SESSION["username"], ENT_QUOTES) . "\"";
+	$sql = mysqli_query($Link, $SelectBookQuery);
+	$stud_data = mysqli_fetch_assoc($sql);
+?>
+	<div class="w3-conatiner" style="width:75%;margin:auto;min-width:300px;">
 	<div class="w3-padding-32 w3-card-2 w3-white w3-margin-top w3-animate-bottom w3-round">
 		<div class="w3-row">
 			<div class="w3-col w3-padding s3 w3-center w3-border-right" style="min-width:256px;">
@@ -28,7 +63,7 @@ li{font-size:20px}
 			<div class="w3-rest w3-text-custom-gray w3-padding" style="min-width:256px;">
 				<ul style="list-style-type:none;padding:0;">
 					<li><h1 class="w3-text-blue">Frank Martin</h1></li>
-					<li class="w3-hover-text-red"><b>ID: </b>FB356</li>
+					<li class="w3-hover-text-red"><b>ID: </b></li>
 					<li class="w3-hover-text-red"><b>DOB: </b>28<sup>th</sup> July 1996</li>
 					<li class="w3-hover-text-red"><b>Mobile No: </b>7506256968</li>
 					<li class="w3-hover-text-red"><b>Parent Contact: </b>9836256968</li>
@@ -68,5 +103,22 @@ li{font-size:20px}
 		</div>
 	</div>
 </div>
+<?php
+}
+?>
+<div class="w3-display-bottommiddle">
+	<div class="w3-col s4 w3-center block">
+		<div class="w3-margin w3-btn w3-round w3-black w3-hover-white">
+			<h1>Logout</h1>
+		</div>
+	</div>
+</div>
 </body>
 </html>
+<?php
+}
+else
+{
+	header("Location:login.php");
+}
+?>

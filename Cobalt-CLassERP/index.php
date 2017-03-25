@@ -2,11 +2,10 @@
 //Starting Session
 	require_once("config.php");
 	session_start();
+	if(isset($_SESSION['username']))
+	{
 ?>
-session_start();
 
-if(isset)
-?>
 <!DOCTYPE html>
 <html>
 <title>Cobalt ClassERP</title>
@@ -25,7 +24,7 @@ a{text-decoration:none}
 <div class="w3-content" style="max-width:1400px">
 <!-- Header -->
 <header class="w3-margin-bottom w3-animate-opacity w3-container w3-text-white w3-center">
-	<h1><a href="index.html"><b>Cobalt</b> Class<b>ERP</b></a></h1>
+	<h1><a href="index.php"><b>Cobalt</b> Class<b>ERP</b></a></h1>
 </header>
 <div class="w3-row w3-animate-bottom w3-center" style="width:75%;margin:auto;">
 	<div class="w3-col s4 w3-center block">
@@ -39,20 +38,18 @@ a{text-decoration:none}
 				<h1>Student Profile</h1>
 			</div>
 		</a>
-		<div id="id01" class=" w3-modal">
-    <div class="w3-modal-content">
-      <div class="w3-container">
-        <span onclick="document.getElementById('id01').style.display='none'" class="w3-closebtn">&times;</span>
-        <p></p>
-      </div>
-    </div>
-  </div>
 	</div>
 	<div class="w3-col s4 w3-center block">
 		<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-teal w3-container w3-teal w3-round w3-center w3-padding-32">
-			<h1>Teacher Profile</h1>
+			<h1>Notes</h1>
 		</div>
 	</div>
+	
+<?php
+if($_SESSION['username']=="admin")
+{
+?>
+
 	<div class="w3-col s4 w3-center block">
 		<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-deep-orange w3-container w3-deep-orange w3-round w3-center w3-padding-32">
 			<h1>Inventory</h1>
@@ -65,9 +62,28 @@ a{text-decoration:none}
 	</div>
 	<div class="w3-col s4 w3-center block">
 		<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-deep-purple w3-container w3-deep-purple w3-round w3-center w3-padding-32">
-			<h1>Notes</h1>
+			<h1>Teacher Profile</h1>
+		</div>
+	</div>
+	
+<?php
+}
+?>
+</div>
+<div class="w3-display-bottommiddle">
+	<div class="w3-col s4 w3-center block">
+		<div class="w3-margin w3-btn w3-round w3-black w3-hover-white">
+			<h1>Logout</h1>
 		</div>
 	</div>
 </div>
 </body>
 </html>
+
+<?php
+}
+else
+{
+	header("Location:login.php");
+}
+?>
