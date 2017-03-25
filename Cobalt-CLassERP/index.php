@@ -33,7 +33,7 @@ a{text-decoration:none}
 		</div>
 	</div>
  	<div class="w3-col s4 w3-center block">
-		<a onclick="document.getElementById('id01').style.display='block'">
+		<a href="studprofile.php">
 			<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-blue w3-container w3-blue w3-round w3-center w3-padding-32">
 				<h1>Student Profile</h1>
 			</div>
