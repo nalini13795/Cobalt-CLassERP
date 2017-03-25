@@ -45,7 +45,7 @@
 		<div class="w3-margin-top w3-margin-bottom w3-card-2 w3-container w3-white w3-round w3-padding-32">
 			<h4>Mark Attendance for <b><?php echo date('d F Y') ?></b></h4>
 			<hr>
-				<form action="markattendance.php" method="POST">
+				<form action="markattendance.php?batch=<?php echo $batch ?>" method="POST">
 					<div class="w3-row">
 						<div class="w3-col m4 l3 w3-padding w3-border-right">
 							<b>Select Subject</b>
@@ -74,7 +74,7 @@
 						</div>
 						
 						<div class="w3-col m8 l9">
-						<table class="w3-table w3-stripped">
+						<table class="w3-table w3-striped">
 							<tr>
 								<th>Student ID</th>
 								<th>Student Name</th>
@@ -92,7 +92,8 @@
 									echo '<tr>
 										<td>'. $studentid .'</td>
 										<td>'. $studentname .'</td>
-										<td><input class="w3-check" type="checkbox" name="present[]" value="'. $studentid .'">  Present</input>
+										<td><input class="w3-check" type="checkbox" name="present[]" value="'. $studentid .'">  Present  </input>
+										<input class="w3-check" type="checkbox" name="absent[]" value="'. $studentid .'">  Absent</input></td>
 									</tr>';
 								}
 							?>
@@ -106,6 +107,23 @@
 			</form>
 		</div>
 	</div>
-<?php 
-	} 
+</div>
+</div>
+</div>
+<div style="float:right;">
+	<div class="w3-col s4 w3-center block">
+		<button class="w3-margin w3-btn w3-round w3-white w3-hover-black" onclick="location.href='logout.php'">
+			<h1>Logout</h1>
+		</button>
+	</div>
+</div>
+</body>
+</html>
+
+<?php
+}
+else
+{
+	header("Location:login.php");
+}
 ?>
