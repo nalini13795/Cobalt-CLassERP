@@ -44,6 +44,7 @@ input {
 <?php
 if($_SESSION['username']!="admin")
 {
+	$id=$_SESSION["username"];
 	if(isset($_GET['id']))
 	{
 		header('location:studentprofile.php');
@@ -63,6 +64,33 @@ else if($_SESSION['username']=="admin")
 	$sql = mysqli_query($Link, $SelectStudentQuery);
 	$stud_data = mysqli_fetch_assoc($sql);
 }
+
+function getAttend($subject){
+	$Link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	if($_SESSION['username']=='admin')
+	{
+		$id = $_GET['id'];
+	}
+	else
+	{
+		$id=$_SESSION["username"];
+	}
+	$SubjectQ="SELECT * FROM attendance where subject='".$subject."' and studentid=".
+			"\"" . htmlspecialchars($id , ENT_QUOTES) . "\"";
+	$SubjectResult = mysqli_query($Link, $SubjectQ);
+	$row = mysqli_fetch_array($SubjectResult,MYSQLI_ASSOC);
+    $count = mysqli_num_rows($SubjectResult);
+	
+	$Attended="SELECT * FROM attendance where Attendance='P' and subject='".$subject."' and studentid=".
+			"\"" . htmlspecialchars($id , ENT_QUOTES) . "\"";
+	$AttendedResult = mysqli_query($Link, $Attended);
+	$row2 = mysqli_fetch_array($AttendedResult,MYSQLI_ASSOC);
+    $attendcount = mysqli_num_rows($AttendedResult);
+	
+	$percent = $attendcount/$count;
+	$percent_friendly = number_format( $percent * 100, 2 ); 
+	return $percent_friendly;
+	}
 ?>
 	<div class="w3-conatiner" style="width:75%;margin:auto;min-width:300px;">
 	<div class="w3-padding-32 w3-card-2 w3-white w3-margin-top w3-animate-bottom w3-round">
@@ -89,25 +117,25 @@ else if($_SESSION['username']=="admin")
 			<div class="w3-col s3 w3-center block-small">
 				<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-blue w3-container w3-blue w3-round w3-center w3-padding-16">
 					Mathematics
-					<h1><b>62%</b></h1>
+					<h1><b><?php echo getAttend("Math")?></b></h1>
 				</div>
 			</div>
 			<div class="w3-col s3 w3-center block-small">
 				<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-blue w3-container w3-blue w3-round w3-center w3-padding-16">
 					Physics
-					<h1><b>79%</b></h1>
+					<h1><b><?php echo getAttend("Physics")?></b></h1>
 				</div>
 			</div>
 			<div class="w3-col s3 w3-center block-small">
 				<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-blue w3-container w3-blue w3-round w3-center w3-padding-16">
 					Chemistry
-					<h1><b>82%</b></h1>
+					<h1><b><?php echo getAttend("Chem")?></b></h1>
 				</div>
 			</div>
 			<div class="w3-col s3 w3-center block-small">
 				<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-blue w3-container w3-blue w3-round w3-center w3-padding-16">
 					Biology
-					<h1><b>44%</b></h1>
+					<h1><b><?php echo getAttend("Bio")?></b></h1>
 				</div>
 			</div>
 		</div>
