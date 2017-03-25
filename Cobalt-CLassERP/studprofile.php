@@ -11,7 +11,7 @@
 <title>Student Profile</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="lib/w3.css">
 <link rel="stylesheet" href="lib/custom.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -42,45 +42,27 @@ input {
 	<h1><a href="index.php"><b>Cobalt</b> Class<b>ERP</b></a></h1>
 </header>
 <?php
-if($_SESSION['username']=="admin")
-{?>
-	<form>
-  		<input type="text" name="search" placeholder="Search..">
-	</form>
-	<br>
-<?php
-}
-?>
-<?php
 if($_SESSION['username']!="admin")
 {
+	if(isset($_GET['id']))
+	{
+		header('location:studentprofile.php');
+	}
 	$Link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	$SelectStudentQuery="SELECT * FROM student where studentid=".
 			"\"" . htmlspecialchars($_SESSION["username"], ENT_QUOTES) . "\"";
 	$sql = mysqli_query($Link, $SelectStudentQuery);
 	$stud_data = mysqli_fetch_assoc($sql);
-	
-	$FindTotalBatchLecturesMath="SELECT * FROM lectures where studentid=".
-			"\"" . htmlspecialchars($stud_data["batch"], ENT_QUOTES) . "\" and subject= Math";
-	$denomresmath = mysqli_query($Link, $FindTotalBatchLecturesMaths);
-	$denominator_math = mysqli_num_rows($denomresmath);
-	
-	$FindTotalBatchLecturesPhysics="SELECT * FROM lectures where studentid=".
-			"\"" . htmlspecialchars($stud_data["batch"], ENT_QUOTES) . "\" and subject= Physics";
-	$denomresphy = mysqli_query($Link, $FindTotalBatchLecturesPhysics);
-	$denominator_physics = mysqli_num_rows($denomresphy);
-	
-	$FindTotalBatchLecturesChem="SELECT * FROM lectures where studentid=".
-			"\"" . htmlspecialchars($stud_data["batch"], ENT_QUOTES) . "\" and subject= Chemistry";
-	$denomreschem = mysqli_query($Link, $FindTotalBatchLectureschem);
-	$denominator_chem = mysqli_num_rows($denomreschem);
-	
-	$FindTotalBatchLecturesBio="SELECT * FROM lectures where studentid=".
-			"\"" . htmlspecialchars($stud_data["batch"], ENT_QUOTES) . "\" and subject= Biology";
-	$denomresbio = mysqli_query($Link, $FindTotalBatchLecturesBio);
-	$denominator_bio = mysqli_num_rows($denombio);
-	
-	
+}
+else if($_SESSION['username']=="admin")
+{
+	$id = $_GET['id'];
+	$Link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	$SelectStudentQuery="SELECT * FROM student where studentid=".
+			"\"" . htmlspecialchars($id , ENT_QUOTES) . "\"";
+	$sql = mysqli_query($Link, $SelectStudentQuery);
+	$stud_data = mysqli_fetch_assoc($sql);
+}
 ?>
 	<div class="w3-conatiner" style="width:75%;margin:auto;min-width:300px;">
 	<div class="w3-padding-32 w3-card-2 w3-white w3-margin-top w3-animate-bottom w3-round">
@@ -92,9 +74,9 @@ if($_SESSION['username']!="admin")
 				<ul style="list-style-type:none;padding:0;">
 					<li><h1 class="w3-text-blue"><?php echo $stud_data['name']?></h1></li>
 					<li class="w3-hover-text-red"><b>ID: </b><?php echo $stud_data['studentid']?></li>
-					<li class="w3-hover-text-red"><b>DOB: </b<?php echo $stud_data['dob']?></li>
+					<li class="w3-hover-text-red"><b>DOB: </b><?php echo $stud_data['dob']?></li>
 					<li class="w3-hover-text-red"><b>Mobile No: </b><?php echo $stud_data['phone']?></li>
-					<li class="w3-hover-text-red"><b>Parent Contact: </b<?php echo $stud_data['parentphone']?></li>
+					<li class="w3-hover-text-red"><b>Parent Contact: </b><?php echo $stud_data['parentphone']?></li>
 					<li class="w3-hover-text-red"><b>Address: </b><?php echo $stud_data['address']?></li>
 				</ul>
 
@@ -131,9 +113,6 @@ if($_SESSION['username']!="admin")
 		</div>
 	</div>
 </div>
-<?php
-}
-?>
 <div class="w3-display-bottomright">
 	<div class="w3-col s4 w3-center block">
 		<button class="w3-margin w3-btn w3-round w3-white w3-hover-black" onclick="location.href='logout.php'">

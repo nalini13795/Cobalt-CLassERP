@@ -18,7 +18,6 @@
 		
 		if($count == 1) {
          $_SESSION['username'] = $myusername;
-         
          header("location: index.php");
 		}
 	  }
@@ -33,7 +32,7 @@
 	<meta charset="UTF-8">
 	<title>ClassERP LOGIN </title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+	<link rel="stylesheet" href="lib/w3.css">
 	<link rel="stylesheet" href="lib/custom.css">
 	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
