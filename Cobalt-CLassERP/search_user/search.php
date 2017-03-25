@@ -29,10 +29,9 @@ if ($tutorial_db->connect_errno) {
 // Define Output HTML Formating
 $html = '';
 $html .= '<li class="result">';
-$html .= '<a href="urlString">';
-$html .= '<h6>nameString';
-$html .= 'functionString </h6>';
-$html .= 'titleString';
+$html .= '<a target="_blank" href="urlString">';
+$html .= 'functionString: ';
+$html .= 'nameString';
 $html .= '</a>';
 $html .= '</li>';
 
@@ -43,7 +42,7 @@ $search_string = $tutorial_db->real_escape_string($search_string);
 // Check Length More Than One Character
 if (strlen($search_string) >= 1 && $search_string !== ' ') {
 	// Build Query
-	$query = 'SELECT * FROM books WHERE  book_number LIKE "%'.$search_string.'%" or title LIKE "%'.$search_string.'%"';
+	$query = 'SELECT * FROM student WHERE name LIKE "%'.$search_string.'%" OR studentid LIKE "%'.$search_string.'%"';
 
 	// Do Search
 	$result = $tutorial_db->query($query);
@@ -56,22 +55,18 @@ if (strlen($search_string) >= 1 && $search_string !== ' ') {
 		foreach ($result_array as $result) {
 
 			// Format Output Strings And Hightlight Matches
-			$display_function = preg_replace("/".$search_string."/i", "<b class='highlight'>".$search_string."</b>", $result['book_number']);
-			$display_name = preg_replace("/".$search_string."/i", "<b class='highlight'>".$search_string."</b>", $result['category_id']);
-			$display_title = preg_replace("/".$search_string."/i", "<b class='highlight'>".$search_string."</b>", $result['title']);
-			$display_url = 'book.php?bid='.urlencode($result['book_id']).'&lang=en';
+			$display_function = preg_replace("/".$search_string."/i", "<b class='highlight'>".$search_string."</b>", $result['studentid']);
+			$display_name = preg_replace("/".$search_string."/i", "<b class='highlight'>".$search_string."</b>", $result['name']);
+			$display_url = 'studprofile.php?id='.urlencode($result['studentid']).'&lang=en';
 
 			// Insert Name
-			$output = str_replace('nameString', $display_name.'-', $html);
+			$output = str_replace('nameString', $display_name, $html);
 
 			// Insert Function
-			$output = str_replace('functionString', $display_function.':', $output);
+			$output = str_replace('functionString', $display_function, $output);
 
 			// Insert URL
 			$output = str_replace('urlString', $display_url, $output);
-			
-			// Insert Title
-			$output = str_replace('titleString', $display_title, $output);
 
 			// Output
 			echo($output);
@@ -82,8 +77,7 @@ if (strlen($search_string) >= 1 && $search_string !== ' ') {
 		$output = str_replace('urlString', 'javascript:void(0);', $html);
 		$output = str_replace('nameString', '<b>No Results Found.</b>', $output);
 		$output = str_replace('functionString', 'Sorry :(', $output);
-		$output = str_replace('titleString', '', $output);
-		
+
 		// Output
 		echo($output);
 	}

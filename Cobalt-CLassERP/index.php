@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="lib/custom.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="search_user/custom.js"></script>
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 a{text-decoration:none}
@@ -39,7 +41,7 @@ if($_SESSION['username']!="admin")
 		</div>
 	</div>
  	<div class="w3-col s4 w3-center block">
-		<a href="studprofile.php">
+		<a href="studprofile.php?id=<?php echo $_SESSION['username']?>">
 			<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-blue w3-container w3-blue w3-round w3-center w3-padding-32">
 				<h1>Student Profile</h1>
 			</div>
@@ -73,11 +75,29 @@ if($_SESSION['username']=="admin")
 		</div>
 	</div>
 	<div class="w3-col s4 w3-center block">
-		<a href="studprofile.php">
+		<a onclick="document.getElementById('id01').style.display='block'">
 			<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-blue w3-container w3-blue w3-round w3-center w3-padding-32">
 				<h1>Student Profile</h1>
 			</div>
 		</a>
+		<div id="id01" class="w3-modal">
+			<div class="w3-modal-content">
+				<div class="w3-container">
+					<div class="w3-content w3-padding">
+						<span onclick="document.getElementById('id01').style.display='none'" 
+						class="w3-button w3-display-topright">&times;</span>
+						<h3 class="w3-padding w3-blue-grey">ENTER STUDENT ID/ NAME</h3>
+						<!--USER SEARCH-->
+						<form id="user_search">
+							<input class="w3-input w3-border" id="search" autocomplete="off" type="text">
+							<div class="w3-text-blue-grey">
+									<ul id="results"></ul>
+							</div><!--INPUT BOX-->
+						<form>
+					</div>
+				</div>	
+			</div>
+		</div>
 	</div>
 	<div class="w3-col s4 w3-center block">
 		<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-teal w3-container w3-teal w3-round w3-center w3-padding-32">

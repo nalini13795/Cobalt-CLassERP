@@ -6,7 +6,7 @@
       $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	  if($conn){
 		$myusername = $_POST['un'];
-		$mypassword = $_POST['pw']; 
+		$mypassword = hash('sha256', $_POST['pw']); 
       
 		$sql = "SELECT username FROM login WHERE username = '$myusername' and password = '$mypassword'";
 		$result = mysqli_query($conn,$sql);
@@ -28,43 +28,42 @@
    }
 ?>
 <!DOCTYPE html>
-<html >
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>COBALT LOGIN </title>
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-
-  <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
-<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-
-      <link rel="stylesheet" href="css/style.css">
-
-  
+	<meta charset="UTF-8">
+	<title>ClassERP LOGIN </title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+	<link rel="stylesheet" href="lib/custom.css">
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+a{text-decoration:none}
+li{font-size:20px}
+.block-small{min-width: 220px;}
+</style>
 <body>
-  
-<!-- Form Mixin-->
-<!-- Input Mixin-->
-<!-- Button Mixin-->
-<!-- Pen Title-->
-<div class="pen-title">
-  <h1>COBALT LOGIN</h1><span></span>
+<div class="w3-content" style="max-width:40%">
+<!-- Header -->
+<header class="w3-margin-bottom w3-animate-opacity w3-container w3-text-white w3-center">
+	<h1><a href="index.html"><b>Cobalt</b> Class<b>ERP</b></a></h1>
+</header>
+<div class="w3-conatiner w3-diplay-middle" style="width:75%;margin:auto;min-width:300px;">
+	<div class="w3-padding-32 w3-card-2 w3-white w3-margin-top w3-animate-bottom w3-round">
+	<div class="w3-margin w3-center">
+			<form action="#" method="POST">
+					<h3><label class="w3-text-blue">Username</label></h3>
+					<input name="un" class="w3-input w3-border" type="text"><br>
+					 
+					<h3><label class="w3-text-blue">Password</label></h3>
+					<input name="pw" class="w3-input w3-border" type="password"><br>
+			
+					<button class="w3-btn w3-blue w3-round"><h3>Login</h3></button>
+			</form>
+	</div>
+	</div>
 </div>
-<!-- Form Module-->
-<div class="module form-module">
-  <div class="toggle">    
-  </div>
-  <div class="form">
-    <h2>Login to your account</h2>
-    <form action="#" method="POST">
-      <input name="un" type="text" placeholder="Username"/>
-      <input name="pw" type="password" placeholder="Password"/>
-      <button>Login</button>
-    </form>
-  </div>
-  
-
 </body>
 </html>
