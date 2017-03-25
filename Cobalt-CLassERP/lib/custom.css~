@@ -1,0 +1,9 @@
+.w3-custom-grey,.w3-hover-custom-grey:hover,.w3-custom-gray,.w3-hover-custom-gray:hover{color:#000!important;background-color:#252525!important}
+
+.w3-text-custom-grey,.w3-hover-text-custom-grey:hover,.w3-text-custom-gray,.w3-hover-text-custom-gray:hover{color:#252525!important}
+
+body {
+	background-image: url("../images/body_back.jpg");
+	background-size: 100%;
+    	background-repeat: no-repeat;
+}
