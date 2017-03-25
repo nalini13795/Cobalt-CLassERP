@@ -26,10 +26,16 @@ a{text-decoration:none}
 <header class="w3-margin-bottom w3-animate-opacity w3-container w3-text-white w3-center">
 	<h1><a href="index.php"><b>Cobalt</b> Class<b>ERP</b></a></h1>
 </header>
+
+
 <div class="w3-row w3-animate-bottom w3-center" style="width:75%;margin:auto;">
+<?php
+if($_SESSION['username']!="admin")
+{
+?>
 	<div class="w3-col s4 w3-center block">
 		<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-red w3-container w3-red w3-round w3-center w3-padding-32">
-			<h1>Attendance</h1>
+			<h1>Schedule</h1>
 		</div>
 	</div>
  	<div class="w3-col s4 w3-center block">
@@ -46,6 +52,7 @@ a{text-decoration:none}
 	</div>
 	
 <?php
+}
 if($_SESSION['username']=="admin")
 {
 ?>
@@ -63,6 +70,23 @@ if($_SESSION['username']=="admin")
 	<div class="w3-col s4 w3-center block">
 		<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-deep-purple w3-container w3-deep-purple w3-round w3-center w3-padding-32">
 			<h1>Teacher Profile</h1>
+		</div>
+	</div>
+	<div class="w3-col s4 w3-center block">
+		<a href="studprofile.php">
+			<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-blue w3-container w3-blue w3-round w3-center w3-padding-32">
+				<h1>Student Profile</h1>
+			</div>
+		</a>
+	</div>
+	<div class="w3-col s4 w3-center block">
+		<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-teal w3-container w3-teal w3-round w3-center w3-padding-32">
+			<h1>Notes</h1>
+		</div>
+	</div>
+	<div class="w3-col s4 w3-center block">
+		<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-red w3-container w3-red w3-round w3-center w3-padding-32">
+			<h1>Attendance</h1>
 		</div>
 	</div>
 	

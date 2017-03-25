@@ -39,10 +39,10 @@ input {
 <div class="w3-content" style="max-width:1400px">
 <!-- Header -->
 <header class="w3-margin-bottom w3-animate-opacity w3-container w3-text-white w3-center">
-	<h1><a href="index.html"><b>Cobalt</b> Class<b>ERP</b></a></h1>
+	<h1><a href="index.php"><b>Cobalt</b> Class<b>ERP</b></a></h1>
 </header>
 <?php
-if($_SESSION['username']!="admin")
+if($_SESSION['username']=="admin")
 {?>
 	<form>
   		<input type="text" name="search" placeholder="Search..">
@@ -55,10 +55,32 @@ if($_SESSION['username']!="admin")
 if($_SESSION['username']!="admin")
 {
 	$Link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-	$SelectBookQuery="SELECT * FROM student where studentid=".
+	$SelectStudentQuery="SELECT * FROM student where studentid=".
 			"\"" . htmlspecialchars($_SESSION["username"], ENT_QUOTES) . "\"";
-	$sql = mysqli_query($Link, $SelectBookQuery);
+	$sql = mysqli_query($Link, $SelectStudentQuery);
 	$stud_data = mysqli_fetch_assoc($sql);
+	
+	$FindTotalBatchLecturesMath="SELECT * FROM lectures where studentid=".
+			"\"" . htmlspecialchars($stud_data["batch"], ENT_QUOTES) . "\" and subject= Math";
+	$denomresmath = mysqli_query($Link, $FindTotalBatchLecturesMaths);
+	$denominator_math = mysqli_num_rows($denomresmath);
+	
+	$FindTotalBatchLecturesPhysics="SELECT * FROM lectures where studentid=".
+			"\"" . htmlspecialchars($stud_data["batch"], ENT_QUOTES) . "\" and subject= Physics";
+	$denomresphy = mysqli_query($Link, $FindTotalBatchLecturesPhysics);
+	$denominator_physics = mysqli_num_rows($denomresphy);
+	
+	$FindTotalBatchLecturesChem="SELECT * FROM lectures where studentid=".
+			"\"" . htmlspecialchars($stud_data["batch"], ENT_QUOTES) . "\" and subject= Chemistry";
+	$denomreschem = mysqli_query($Link, $FindTotalBatchLectureschem);
+	$denominator_chem = mysqli_num_rows($denomreschem);
+	
+	$FindTotalBatchLecturesBio="SELECT * FROM lectures where studentid=".
+			"\"" . htmlspecialchars($stud_data["batch"], ENT_QUOTES) . "\" and subject= Biology";
+	$denomresbio = mysqli_query($Link, $FindTotalBatchLecturesBio);
+	$denominator_bio = mysqli_num_rows($denombio);
+	
+	
 ?>
 	<div class="w3-conatiner" style="width:75%;margin:auto;min-width:300px;">
 	<div class="w3-padding-32 w3-card-2 w3-white w3-margin-top w3-animate-bottom w3-round">
