@@ -108,9 +108,9 @@ if($_SESSION['username']!="admin")
 ?>
 <div class="w3-display-bottommiddle">
 	<div class="w3-col s4 w3-center block">
-		<div class="w3-margin w3-btn w3-round w3-black w3-hover-white">
+		<button class="w3-margin w3-btn w3-round w3-black w3-hover-white" onclick="location.href='logout.php'">
 			<h1>Logout</h1>
-		</div>
+		</button>
 	</div>
 </div>
 </body>
