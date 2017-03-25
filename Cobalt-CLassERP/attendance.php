@@ -42,7 +42,7 @@
 		</div>
 	</div>
 	<div class="w3-row w3-animate-bottom" style="width:75%;margin:auto;">
-		<div class="w3-margin-top w3-card-2 w3-container w3-white w3-round w3-padding-32">
+		<div class="w3-margin-top w3-margin-bottom w3-card-2 w3-container w3-white w3-round w3-padding-32">
 			<h4>Mark Attendance for <b><?php echo date('d F Y') ?></b></h4>
 			<hr>
 				<form action="markattendance.php" method="POST">
@@ -92,13 +92,17 @@
 									echo '<tr>
 										<td>'. $studentid .'</td>
 										<td>'. $studentname .'</td>
-										<td><input class="w3-check" type="checkbox" name="'. $studentid .'" value="present">  Present</input>
+										<td><input class="w3-check" type="checkbox" name="present[]" value="'. $studentid .'">  Present</input>
 									</tr>';
 								}
 							?>
 						</table>
 						</div>
 					</div>
+					<hr>
+					<div class="w3-container w3-center">
+						<button class="w3-btn w3-blue w3-hover-white w3-hover-text-blue w3-round"><h3>Submit</h3></button>
+					<div>
 			</form>
 		</div>
 	</div>
