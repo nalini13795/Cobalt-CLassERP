@@ -86,7 +86,7 @@ if($_SESSION['username']=="admin")
 					<div class="w3-content w3-padding">
 						<span onclick="document.getElementById('id01').style.display='none'" 
 						class="w3-button w3-display-topright">&times;</span>
-						<h3 class="w3-padding w3-blue-grey">ENTER STUDENT ID/ NAME</h3>
+						<h3 class="w3-padding w3-blue">Enter Student Name/ID</h3>
 						<!--USER SEARCH-->
 						<form id="user_search">
 							<input class="w3-input w3-border" id="search" autocomplete="off" type="text">
@@ -105,8 +105,30 @@ if($_SESSION['username']=="admin")
 		</div>
 	</div>
 	<div class="w3-col s4 w3-center block">
-		<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-red w3-container w3-red w3-round w3-center w3-padding-32">
-			<h1>Attendance</h1>
+		<a onclick="document.getElementById('id02').style.display='block'">
+			<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-red w3-container w3-red w3-round w3-center w3-padding-32">
+				<h1>Attendance</h1>
+			</div>
+		</a>
+		<div id="id02" class="w3-modal">
+			<div class="w3-modal-content">
+				<div class="w3-container">
+					<div class="w3-content w3-padding">
+						<span onclick="document.getElementById('id02').style.display='none'" 
+						class="w3-button w3-display-topright">&times;</span>
+						<h3 class="w3-padding w3-blue">Select Batch</h3>
+						<button class="w3-margin w3-btn w3-round w3-green w3-hover-white w3-hover-text-green" onclick="location.href='attendance.php?batch=1111'">
+							<h1>SY1111</h1>
+						</button>
+						<button class="w3-margin w3-btn w3-round w3-green w3-hover-white w3-hover-text-green" onclick="location.href='attendance.php?batch=1110'">
+							<h1>SY1110</h1>
+						</button>
+						<button class="w3-margin w3-btn w3-round w3-green w3-hover-white w3-hover-text-green" onclick="location.href='attendance.php?batch=1101'">
+							<h1>SY1101</h1>
+						</button>
+					</div>
+				</div>	
+			</div>
 		</div>
 	</div>
 	

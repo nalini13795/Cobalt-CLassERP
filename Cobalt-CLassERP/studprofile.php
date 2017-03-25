@@ -20,20 +20,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 a{text-decoration:none}
 li{font-size:20px}
 .block-small{min-width: 220px;}
-input {
-    width: 130px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-image: url('searchicon.png');
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
-    width: 100%;
-
-}
 </style>
 ​<body>
 <div class="w3-content" style="max-width:1400px">
@@ -47,7 +33,7 @@ if($_SESSION['username']!="admin")
 	$id=$_SESSION["username"];
 	if(isset($_GET['id']))
 	{
-		header('location:studentprofile.php');
+		header('location:studprofile.php');
 	}
 	$Link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	$SelectStudentQuery="SELECT * FROM student where studentid=".
@@ -57,7 +43,14 @@ if($_SESSION['username']!="admin")
 }
 else if($_SESSION['username']=="admin")
 {
-	$id = $_GET['id'];
+	if(isset($_GET['id']))
+	{
+		$id = $_GET['id'];
+	}
+	else
+	{
+		$id = 123;
+	}	
 	$Link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	$SelectStudentQuery="SELECT * FROM student where studentid=".
 			"\"" . htmlspecialchars($id , ENT_QUOTES) . "\"";
@@ -69,7 +62,14 @@ function getAttend($subject){
 	$Link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	if($_SESSION['username']=='admin')
 	{
-		$id = $_GET['id'];
+		if(isset($_GET['id']))
+		{
+			$id = $_GET['id'];
+		}
+		else
+		{
+			$id = 123;
+		}	
 	}
 	else
 	{
