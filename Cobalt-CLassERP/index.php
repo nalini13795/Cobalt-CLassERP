@@ -1,3 +1,12 @@
+<?php
+//Starting Session
+	require_once("config.php");
+	session_start();
+?>
+session_start();
+
+if(isset)
+?>
 <!DOCTYPE html>
 <html>
 <title>Cobalt ClassERP</title>
@@ -19,7 +28,7 @@ a{text-decoration:none}
 	<h1><a href="index.html"><b>Cobalt</b> Class<b>ERP</b></a></h1>
 </header>
 <div class="w3-row w3-animate-bottom w3-center" style="width:75%;margin:auto;">
-  <div class="w3-col s4 w3-center block">
+	<div class="w3-col s4 w3-center block">
 		<div class="w3-margin w3-card-2 w3-hover-white w3-hover-text-red w3-container w3-red w3-round w3-center w3-padding-32">
 			<h1>Attendance</h1>
 		</div>
@@ -34,8 +43,7 @@ a{text-decoration:none}
     <div class="w3-modal-content">
       <div class="w3-container">
         <span onclick="document.getElementById('id01').style.display='none'" class="w3-closebtn">&times;</span>
-        <p>Some text. Some text. Some text.</p>
-        <p>Some text. Some text. Some text.</p>
+        <p></p>
       </div>
     </div>
   </div>
