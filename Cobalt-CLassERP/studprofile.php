@@ -41,15 +41,21 @@ input {
 <header class="w3-margin-bottom w3-animate-opacity w3-container w3-text-white w3-center">
 	<h1><a href="index.html"><b>Cobalt</b> Class<b>ERP</b></a></h1>
 </header>
+<?php
+if($_SESSION['username']!="admin")
+{?>
 	<form>
   		<input type="text" name="search" placeholder="Search..">
 	</form>
 	<br>
 <?php
+}
+?>
+<?php
 if($_SESSION['username']!="admin")
 {
 	$Link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-	$SelectBookQuery="SELECT * FROM students where book_id=".
+	$SelectBookQuery="SELECT * FROM student where studentid=".
 			"\"" . htmlspecialchars($_SESSION["username"], ENT_QUOTES) . "\"";
 	$sql = mysqli_query($Link, $SelectBookQuery);
 	$stud_data = mysqli_fetch_assoc($sql);
@@ -62,16 +68,16 @@ if($_SESSION['username']!="admin")
 			</div>
 			<div class="w3-rest w3-text-custom-gray w3-padding" style="min-width:256px;">
 				<ul style="list-style-type:none;padding:0;">
-					<li><h1 class="w3-text-blue">Frank Martin</h1></li>
-					<li class="w3-hover-text-red"><b>ID: </b></li>
-					<li class="w3-hover-text-red"><b>DOB: </b>28<sup>th</sup> July 1996</li>
-					<li class="w3-hover-text-red"><b>Mobile No: </b>7506256968</li>
-					<li class="w3-hover-text-red"><b>Parent Contact: </b>9836256968</li>
-					<li class="w3-hover-text-red"><b>Address: </b>A408 Golden Square, Sundar Nagar, Santacruz East.</li>
+					<li><h1 class="w3-text-blue"><?php echo $stud_data['name']?></h1></li>
+					<li class="w3-hover-text-red"><b>ID: </b><?php echo $stud_data['studentid']?></li>
+					<li class="w3-hover-text-red"><b>DOB: </b<?php echo $stud_data['dob']?></li>
+					<li class="w3-hover-text-red"><b>Mobile No: </b><?php echo $stud_data['phone']?></li>
+					<li class="w3-hover-text-red"><b>Parent Contact: </b<?php echo $stud_data['parentphone']?></li>
+					<li class="w3-hover-text-red"><b>Address: </b><?php echo $stud_data['address']?></li>
 				</ul>
 
 			</div>
-		</div>
+		</div> 
 	</div>
 	<div class="w3-padding w3-center w3-card-2 w3-white w3-margin-top w3-animate-bottom w3-round">
 		<h3>Attendance</h3>
@@ -106,9 +112,9 @@ if($_SESSION['username']!="admin")
 <?php
 }
 ?>
-<div class="w3-display-bottommiddle">
+<div class="w3-display-bottomright">
 	<div class="w3-col s4 w3-center block">
-		<button class="w3-margin w3-btn w3-round w3-black w3-hover-white" onclick="location.href='logout.php'">
+		<button class="w3-margin w3-btn w3-round w3-white w3-hover-black" onclick="location.href='logout.php'">
 			<h1>Logout</h1>
 		</button>
 	</div>
